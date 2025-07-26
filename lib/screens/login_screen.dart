@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool obscurePassword = true;
   bool rememberMe = false;
   final Color velvetIndigo = const Color(0xFF4B0082);
-  final Color darkBackground = const Color(0xFF0F0B21); // Darker background
+  final Color darkBackground = const Color(0xFF0F0B21);
 
   @override
   void initState() {
@@ -67,7 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // App Logo/Title
                 Text('HELLO',
                     style: GoogleFonts.poppins(
                       fontSize: 42,
@@ -82,8 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.white70,
                     )),
                 const SizedBox(height: 40),
-
-                // Login Card
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(24),
@@ -104,7 +101,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: Column(
                     children: [
-                      // Email Field
                       TextField(
                         controller: emailController,
                         style: const TextStyle(color: Colors.white),
@@ -124,8 +120,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-
-                      // Password Field
                       TextField(
                         controller: passwordController,
                         obscureText: obscurePassword,
@@ -143,10 +137,11 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Colors.white70),
                           suffixIcon: IconButton(
                             icon: Icon(
-                                obscurePassword
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                color: Colors.white70),
+                              obscurePassword
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.white70,
+                            ),
                             onPressed: () {
                               setState(() {
                                 obscurePassword = !obscurePassword;
@@ -158,8 +153,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(height: 16),
-
-                      // Remember Me & Forgot Password
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -174,12 +167,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 fillColor:
                                     WidgetStateProperty.resolveWith<Color>(
-                                        (states) {
-                                  if (states.contains(WidgetState.selected)) {
-                                    return velvetIndigo;
-                                  }
-                                  return Colors.white.withOpacity(0.2);
-                                }),
+                                  (states) {
+                                    if (states.contains(WidgetState.selected)) {
+                                      return velvetIndigo;
+                                    }
+                                    return Colors.white.withOpacity(0.2);
+                                  },
+                                ),
                                 checkColor: Colors.white,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4),
@@ -200,8 +194,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                       const SizedBox(height: 24),
-
-                      // Login Button
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -245,87 +237,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 32),
-
-                // Divider
-                Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        color: Colors.white.withOpacity(0.2),
-                        thickness: 1,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Text('or continue with',
-                          style:
-                              TextStyle(color: Colors.white.withOpacity(0.5))),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        color: Colors.white.withOpacity(0.2),
-                        thickness: 1,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-
-                // Google Sign-In Button
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () async {
-                      try {
-                        final user = await AuthService.signInWithGoogle();
-                        if (user != null && mounted) {
-                          Navigator.pushReplacementNamed(context, '/home');
-                        }
-                      } catch (e) {
-                        if (!mounted) return;
-                        setState(() => error = 'Google sign-in failed!');
-                      }
-                    },
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      side: BorderSide(color: Colors.white.withOpacity(0.2)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Image.asset(
-                            'assets/google_logo.png',
-                            height: 24,
-                            width: 24,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Text(
-                          'Continue with Google',
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 32),
-
-                // Sign Up Prompt
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
