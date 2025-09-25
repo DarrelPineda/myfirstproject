@@ -1,5 +1,1 @@
-@echo off
-flutter build web
-powershell -Command "(Get-Content build\web\index.html) -replace '<base href=\"/\">', '<base href=\"/myfirstproject/\">' | Set-Content build\web\index.html"
-echo ✅ index.html base href updated to /myfirstproject/
-pause
+console.log("✅ index.js is working!");
